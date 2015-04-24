@@ -1,5 +1,8 @@
 [package]
 
 name = "pmap"
-version = "0.0.1"
+version = "0.0.3"
 authors = ["Calvin Metcalf <cmetcalf@appgeo.com>"]
+description = "parallel map for rust"
+repository = "https://github.com/calvinmetcalf/pmap"
+license = "MIT"

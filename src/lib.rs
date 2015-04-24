@@ -1,4 +1,5 @@
-#![feature(scoped, test)]
+#![feature(scoped)]
+#![cfg_attr(test, feature(test))]
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -35,6 +36,7 @@ where F: Send+Sync, F: Fn(A)->B,  A: Send+Sync+Copy,  B: Send
         }
     }
 }
+
 #[cfg(test)]
 mod tests {
     extern crate test;
