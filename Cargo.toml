@@ -6,3 +6,6 @@ authors = ["Calvin Metcalf <cmetcalf@appgeo.com>"]
 description = "parallel map for rust"
 repository = "https://github.com/calvinmetcalf/pmap"
 license = "MIT"
+
+[dev-dependencies]
+rand = "0.3"
