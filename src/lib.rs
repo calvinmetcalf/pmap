@@ -1,9 +1,32 @@
+//! A function for doing a parallel map without copying
+
 #![feature(scoped)]
 #![cfg_attr(test, feature(test))]
 use std::sync::{Arc};
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::mem;
+
+
+
+/// Execute a parallel map operation on an array
+///
+/// # Example
+///
+/// ```rust
+/// use pmap::pmap;
+/// fn factorial (acc: usize, x: usize) -> usize {
+///     match x {
+///       1=> acc,
+///       _=> factorial(acc * x, x - 1)
+///   }
+/// }
+/// let behind = [1usize, 2, 3, 4, 5];
+/// let mut thing = [0usize; 5];
+/// pmap(&behind, &mut thing, 2, |x: usize| factorial(1, x));
+/// let out = [1usize, 2, 6,24,120];
+/// assert_eq!(thing, out);
+/// ```
 pub fn pmap<A, B, F>(array:  &[A], out:&mut [B], max: usize, f: F)
 where F: Send+Sync, F: Fn(A)->B,  A: Send+Sync+Copy,  B: Send+Sync
   {
